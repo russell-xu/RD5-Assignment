@@ -1,0 +1,11 @@
+DROP
+    DATABASE IF EXISTS userdata;
+CREATE DATABASE userdata; 
+USE
+    userdata;
+DROP TABLE IF EXISTS
+    userlist;
+CREATE TABLE userlist(
+    Username VARCHAR(20) NOT NULL,
+    PASSWORD VARCHAR(20) NOT NULL
+)
