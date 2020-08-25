@@ -15,22 +15,44 @@ if (isset($_POST["btnHome"])) {
 $ErrorMessage = "";
 
 if (isset($_POST["btnOK"])) {
-  $deposit_amount = $_POST["deposit_amount"];
+  $withdrawal_amount = $_POST["withdrawal_amount"];
 
-  if (preg_match("/^[0-9]+$/", $deposit_amount)) {
+  if (preg_match("/^[0-9]+$/", $withdrawal_amount)) {
     require_once("connectconfig.php");
 
     $id = $_SESSION["id"];
     $sql_number = "select * from userlist where Idnumber='$id'";
     $result = mysqli_query($link, $sql_number);
     $row = @mysqli_fetch_row($result);
-    $amount = $row[3] - $deposit_amount;
+    $amount = $row[3] - $withdrawal_amount;
 
     if ($amount > 0) {
       $sql = <<<multi
-    UPDATE userlist SET Deposit="$amount"
-  multi;
+        UPDATE
+            userlist
+        SET
+            Deposit = "$amount"
+        WHERE
+            Idnumber = "$id";
+      multi;
       mysqli_query($link, $sql);
+
+      $sql_detail = <<<multi
+        INSERT INTO detail(
+            Withdrawal,
+            Deposit,
+            Balance,
+            Idnumber
+        )
+        VALUES(
+            '$withdrawal_amount',
+            '0',
+            '$amount',
+            '$id'
+        );
+      multi;
+      mysqli_query($link, $sql_detail);
+
       header("Location: withdrawal_success.php");
       exit();
     } else {
@@ -93,7 +115,7 @@ if (isset($_POST["btnOK"])) {
         <tr>
           <td class="align-middle">請輸入要提取的金額</td>
           <td>
-            <input class="input_amount" type="number" name="deposit_amount" id="deposit_amount" />
+            <input class="input_amount" type="number" name="withdrawal_amount" id="withdrawal_amount" />
           </td>
         </tr>
         <tr>

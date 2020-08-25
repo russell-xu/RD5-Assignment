@@ -10,9 +10,7 @@ CREATE TABLE userlist(
     PASSWORD VARCHAR(20) NOT NULL,
     Deposit INT NOT NULL DEFAULT '0',
     PRIMARY KEY(Idnumber)
-); 
-INSERT INTO userlist(IdNumber, UserName, PASSWORD)
-VALUES('K123456789', 'admin', 'Ghjj3488');
+);
 DROP TABLE IF EXISTS
     detail;
 CREATE TABLE detail(
@@ -22,11 +20,4 @@ CREATE TABLE detail(
     Balance INT NOT NULL DEFAULT '0',
     Idnumber VARCHAR(10) NOT NULL,
     FOREIGN KEY(Idnumber) REFERENCES userlist(Idnumber)
-); 
-INSERT INTO detail(
-    Withdrawal,
-    Deposit,
-    Balance,
-    Idnumber
-)
-VALUES('100000', '0', '200000', 'K123456789');
+);
