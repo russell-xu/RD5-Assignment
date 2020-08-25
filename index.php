@@ -28,6 +28,7 @@ if (isset($_POST["btnOK"])) {
   $row = @mysqli_fetch_row($result);
 
   if ($row !== null && $sIdNumber != null && $sUserName != null && $sPassword != null && $row[0] == $sIdNumber && $row[1] == $sUserName && $row[2] == $sPassword) {
+    $_SESSION["id"] = $sIdNumber;
     $_SESSION["userName"] = $sUserName;
     header("Location: secret.php");
     exit();

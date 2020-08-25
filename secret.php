@@ -46,7 +46,7 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
       <thead>
         <tr class="bg-primary text-light">
           <td>
-            <p class="title">會員系統 － 會員專用</p>
+            <p class="title">會員系統 － 首頁</p>
           </td>
         </tr>
       </thead>
@@ -56,10 +56,10 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
         </tr>
         <tr>
           <td>
-            <a href="index.php" class="btn btn-success feature" role="button">提款</a>
-            <a href="index.php" class="btn btn-success feature" role="button">存款</a>
-            <a href="index.php" class="btn btn-success feature" role="button">查詢餘額</a>
-            <a href="index.php" class="btn btn-success feature" role="button">查詢明細</a>
+            <a href="withdrawal.php" class="btn btn-success feature" role="button">提款</a>
+            <a href="deposit.php" class="btn btn-success feature" role="button">存款</a>
+            <a href="check_balances.php" class="btn btn-success feature" role="button">查詢餘額</a>
+            <a href="query_details.php" class="btn btn-success feature" role="button">查詢明細</a>
           </td>
         </tr>
         <tr class="bg-primary text-light">
