@@ -27,7 +27,14 @@ if (isset($_POST["btnOK"])) {
     $amount = $row[3] + $deposit_amount;
 
     $sql = <<<multi
-    UPDATE userlist SET Deposit="$amount"
+    UPDATE userlist SET Deposit="$amount";
+    INSERT INTO detail(
+      Withdrawal,
+      Deposit,
+      Balance,
+      Idnumber
+    )
+    VALUES('0', '$deposit_amount', '$amount', '$id');
   multi;
     mysqli_query($link, $sql);
     header("Location: deposit_success.php");

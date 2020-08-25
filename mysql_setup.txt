@@ -1,13 +1,32 @@
 DROP
     DATABASE IF EXISTS userdata;
-CREATE DATABASE userdata; 
-USE
+CREATE DATABASE userdata; USE
     userdata;
 DROP TABLE IF EXISTS
     userlist;
 CREATE TABLE userlist(
     Idnumber VARCHAR(10) NOT NULL,
     Username VARCHAR(20) NOT NULL,
-    Password VARCHAR(20) NOT NULL,
-    Deposit int NOT NULL default '0'
+    PASSWORD VARCHAR(20) NOT NULL,
+    Deposit INT NOT NULL DEFAULT '0',
+    PRIMARY KEY(Idnumber)
+); 
+INSERT INTO userlist(IdNumber, UserName, PASSWORD)
+VALUES('K123456789', 'admin', 'Ghjj3488');
+DROP TABLE IF EXISTS
+    detail;
+CREATE TABLE detail(
+    DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Withdrawal INT NOT NULL DEFAULT '0',
+    Deposit INT NOT NULL DEFAULT '0',
+    Balance INT NOT NULL DEFAULT '0',
+    Idnumber VARCHAR(10) NOT NULL,
+    FOREIGN KEY(Idnumber) REFERENCES userlist(Idnumber)
+); 
+INSERT INTO detail(
+    Withdrawal,
+    Deposit,
+    Balance,
+    Idnumber
 )
+VALUES('100000', '0', '200000', 'K123456789');

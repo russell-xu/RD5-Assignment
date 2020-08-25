@@ -6,6 +6,12 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
   exit();
 }
 
+require_once("connectconfig.php");
+$id = $_SESSION["id"];
+$sql_number = "select * from userlist where Idnumber='$id'";
+$result = mysqli_query($link, $sql_number);
+$row = @mysqli_fetch_row($result);
+$amount = $row[3];
 ?>
 
 <!DOCTYPE html>
@@ -52,13 +58,14 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
       </thead>
       <tbody>
         <tr>
-          <td>你好，<?= $_SESSION["userName"] ?></td>
+          <td>你好，<?= $_SESSION["userName"] ?><br>
+            餘額：<?= $amount ?>
+          </td>
         </tr>
         <tr>
           <td>
             <a href="withdrawal.php" class="btn btn-success feature" role="button">提款</a>
             <a href="deposit.php" class="btn btn-success feature" role="button">存款</a>
-            <a href="check_balances.php" class="btn btn-success feature" role="button">查詢餘額</a>
             <a href="query_details.php" class="btn btn-success feature" role="button">查詢明細</a>
           </td>
         </tr>
