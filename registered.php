@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
-    header("Location: index.php");
-    exit();
-}
 
 if (isset($_POST["btnHome"])) {
   header("Location: index.php");
@@ -20,15 +16,15 @@ if (isset($_POST["btnOK"])) {
 
   require_once("connectconfig.php");
   $sql = "select * from userlist where Idnumber='$sIdNumber'";
-  $result = mysqli_query($link, $sql);
-  $num = mysqli_num_rows($result);
+  $result = $link->query($sql);
+  $num = $result->num_rows;
 
   if (preg_match("/^[A-Z]{1}[12ABCD]{1}[0-9]{8}$/", $sIdNumber) && trim($sUserName) != "" && preg_match('/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8}/', $sPassword) && $num == 0) {
     $_SESSION["userName"] = $sUserName;
     $sql = <<<multi
   INSERT INTO userlist(IdNumber, UserName, Password) VALUES('$sIdNumber', '$sUserName', '$sPassword');
   multi;
-    mysqli_query($link, $sql);
+    $link->query($sql);
     header("Location: registration_success.php");
     exit();
   } else {

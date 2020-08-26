@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
-    header("Location: index.php");
-    exit();
+  header("Location: index.php");
+  exit();
 }
 
 $ErrorMessage = "";
@@ -15,8 +15,8 @@ if (isset($_POST["btnOK"])) {
 
     $id = $_SESSION["id"];
     $sql_number = "select * from userlist where Idnumber='$id'";
-    $result = mysqli_query($link, $sql_number);
-    $row = @mysqli_fetch_row($result);
+    $result = $link->query($sql_number);
+    $row = @$result->fetch_row();
     $amount = $row[3] + $deposit_amount;
 
     $sql = <<<multi
@@ -27,7 +27,7 @@ if (isset($_POST["btnOK"])) {
       WHERE
           Idnumber = "$id";
     multi;
-    mysqli_query($link, $sql);
+    $link->query($sql);
 
     $sql_detail = <<<multi
       INSERT INTO detail(
@@ -43,7 +43,7 @@ if (isset($_POST["btnOK"])) {
           '$id'
       );
     multi;
-    mysqli_query($link, $sql_detail);
+    $link->query($sql_detail);
 
     header("Location: deposit_success.php");
     exit();

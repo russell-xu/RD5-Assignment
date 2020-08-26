@@ -10,8 +10,8 @@ if (isset($_POST["btnOK"])) {
 
   require_once("connectconfig.php");
   $sql = "SELECT * FROM userlist where Idnumber = '$sIdNumber'";
-  $result = mysqli_query($link, $sql);
-  $row = @mysqli_fetch_row($result);
+  $result = $link->query($sql);
+  $row = @$result->fetch_row();
 
   if ($row !== null && $sIdNumber != null && $sUserName != null && $sPassword != null && $row[0] == $sIdNumber && $row[1] == $sUserName && $row[2] == $sPassword) {
     $_SESSION["id"] = $sIdNumber;

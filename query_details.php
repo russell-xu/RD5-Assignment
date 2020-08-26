@@ -16,7 +16,7 @@ FROM
 WHERE
     `Idnumber` = '$id'
 multi;
-$result = mysqli_query($link, $sql);
+$result = $link->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +28,8 @@ $result = mysqli_query($link, $sql);
     <title>Lag - Member Page</title>
     <style>
         body {
-            height: 100vh;
+            padding: 30px 0;
             display: flex;
-            align-items: center;
             justify-content: center;
             font-size: 20px;
             font-family: Microsoft JhengHei;
