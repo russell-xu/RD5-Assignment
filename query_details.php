@@ -25,7 +25,7 @@ $result = $link->query($sql);
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Lag - Member Page</title>
+    <title>網路銀行 － 查詢明細</title>
     <style>
         body {
             padding: 30px 0;
@@ -52,7 +52,7 @@ $result = $link->query($sql);
             <thead>
                 <tr class="bg-primary text-light">
                     <td colspan="4">
-                        <p class="title">會員系統 － 查詢明細</p>
+                        <p class="title">網路銀行 － 查詢明細</p>
                     </td>
                 </tr>
                 <tr class="bg-success text-light">

@@ -25,7 +25,7 @@ $amount = $row[3];
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <title>Lag - Member Page</title>
+  <title>網路銀行 － 首頁</title>
   <style>
     body {
       height: 100vh;
@@ -61,7 +61,7 @@ $amount = $row[3];
       <thead>
         <tr class="bg-primary text-light">
           <td>
-            <p class="title">會員系統 － 首頁</p>
+            <p class="title">網路銀行 － 首頁</p>
           </td>
         </tr>
       </thead>

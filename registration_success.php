@@ -13,7 +13,7 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Lag - Member Page</title>
+    <title>網路銀行 － 註冊成功</title>
     <style>
         body {
             height: 100vh;
@@ -41,7 +41,7 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
             <thead>
                 <tr class="bg-primary text-light">
                     <td>
-                        <p class="title">會員系統 － 註冊成功</p>
+                        <p class="title">網路銀行 － 註冊成功</p>
                     </td>
                 </tr>
             </thead>
