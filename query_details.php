@@ -1,8 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
-    $_SESSION["lastPage"] = "secret.php";
-    header("Location: registered.php");
+    header("Location: index.php");
     exit();
 }
 

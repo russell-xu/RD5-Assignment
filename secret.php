@@ -1,8 +1,13 @@
 <?php
 session_start();
 if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
-  $_SESSION["lastPage"] = "secret.php";
-  header("Location: registered.php");
+  header("Location: index.php");
+  exit();
+}
+
+if (isset($_POST["btnSignOut"])) {
+  $_SESSION["userName"] = "Guest";
+  header("Location: index.php");
   exit();
 }
 
@@ -47,7 +52,7 @@ $amount = $row[3];
 </head>
 
 <body>
-  <div>
+  <form method="post">
     <table class="table table-bordered">
       <thead>
         <tr class="bg-primary text-light">
@@ -71,12 +76,12 @@ $amount = $row[3];
         </tr>
         <tr class="bg-primary text-light">
           <td>
-            <a href="index.php" class="btn btn-warning" role="button">登出</a>
+            <input class="btn btn-warning" type="submit" name="btnSignOut" id="btnSignOut" value="登出" />
           </td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </form>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

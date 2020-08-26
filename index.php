@@ -1,19 +1,5 @@
 <?php
 session_start();
-if (isset($_SESSION["userName"]))
-  $sUserName = $_SESSION["userName"];
-else {
-  $sUserName = "Guest";
-}
-
-if ($sUserName == "Guest") {
-  $_SESSION["LoginStatus"] = "註冊";
-  $_SESSION["getLoginStatus"] = "";
-} else {
-  $_SESSION["LoginStatus"] = "登出";
-  $_SESSION["getLoginStatus"] = "?logout=1";
-}
-
 
 $ErrorMessage = "";
 

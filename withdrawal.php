@@ -1,16 +1,9 @@
 <?php
 session_start();
-if (isset($_GET["logout"])) {
-  $_SESSION["userName"] = "Guest";
-  header("Location: index.php");
-  exit();
+if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
+    header("Location: index.php");
+    exit();
 }
-
-if (isset($_POST["btnHome"])) {
-  header("Location: secret.php");
-  exit();
-}
-
 
 $ErrorMessage = "";
 
