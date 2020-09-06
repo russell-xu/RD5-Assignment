@@ -4,13 +4,6 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
     header("Location: index.php");
     exit();
 }
-
-if (isset($_POST["btnSignOut"])) {
-    $_SESSION["userName"] = "Guest";
-    header("Location: index.php");
-    exit();
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +38,7 @@ if (isset($_POST["btnSignOut"])) {
     <form method="post">
         <table class="table table-bordered">
             <thead>
-                <tr class="bg-primary text-light">
+                <tr class="bg-dark text-light">
                     <td>
                         <p class="title">網路銀行 － 提款成功</p>
                     </td>
@@ -55,10 +48,9 @@ if (isset($_POST["btnSignOut"])) {
                 <tr>
                     <td>提款成功！</td>
                 </tr>
-                <tr class="bg-primary text-light">
+                <tr class="bg-dark text-light">
                     <td>
                         <a href="secret.php" class="btn btn-warning" role="button">回到首頁</a>
-                        <input class="btn btn-warning" type="submit" name="btnSignOut" id="btnSignOut" value="登出" />
                     </td>
                 </tr>
             </tbody>

@@ -39,7 +39,7 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
     <div>
         <table class="table table-bordered">
             <thead>
-                <tr class="bg-primary text-light">
+                <tr class="bg-dark text-light">
                     <td>
                         <p class="title">網路銀行 － 註冊成功</p>
                     </td>
@@ -49,7 +49,7 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
                 <tr>
                     <td>註冊成功！<br>你好，<?= $_SESSION["userName"] ?>。<br>請回登入頁面重新登入。</td>
                 </tr>
-                <tr class="bg-primary text-light">
+                <tr class="bg-dark text-light">
                     <td>
                         <a href="index.php" class="btn btn-warning" role="button">回登入頁面</a>
                     </td>

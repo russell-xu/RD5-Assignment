@@ -70,7 +70,7 @@ if (isset($_POST["btnOK"])) {
   <form id="form2" name="form2" method="post" action="registered.php">
     <table class="table table-bordered">
       <thead>
-        <tr class="bg-primary text-light">
+        <tr class="bg-dark text-light">
           <td colspan="2">
             <p class="title">網路銀行 - 註冊</p>
           </td>
@@ -99,7 +99,7 @@ if (isset($_POST["btnOK"])) {
           <td colspan="2">
             <input class="btn btn-success register" type="submit" name="btnOK" id="btnOK" value="註冊" />
         </tr>
-        <tr class="bg-primary text-light">
+        <tr class="bg-dark text-light">
           <td colspan="2">
             <input class="btn btn-warning" type="reset" name="btnReset" id="btnReset" value="重設" />
             <input class="btn btn-warning" type="submit" name="btnHome" id="btnHome" value="回登入頁面" />

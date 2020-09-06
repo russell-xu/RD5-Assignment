@@ -15,8 +15,22 @@ FROM
     `detail`
 WHERE
     `Idnumber` = '$id'
+ORDER BY
+    `DATE`
+DESC
 multi;
 $result = $link->query($sql);
+
+$data_nums = $result->num_rows;
+$per = 10;
+$pages = ceil($data_nums / $per);
+if (!isset($_GET["page"])) {
+    $page = 1;
+} else {
+    $page = intval($_GET["page"]);
+}
+$start = ($page - 1) * $per;
+$result = $link->query($sql . ' LIMIT ' . $start . ', ' . $per);
 ?>
 
 <!DOCTYPE html>
@@ -50,12 +64,12 @@ $result = $link->query($sql);
     <div>
         <table class="table table-bordered">
             <thead>
-                <tr class="bg-primary text-light">
+                <tr class="bg-dark text-light">
                     <td colspan="4">
                         <p class="title">網路銀行 － 查詢明細</p>
                     </td>
                 </tr>
-                <tr class="bg-success text-light">
+                <tr class="bg-info text-light">
                     <td>
                         <p class="title">日期時間</p>
                     </td>
@@ -79,7 +93,15 @@ $result = $link->query($sql);
                         <td class="align-middle"><?= $row['Balance'] ?></td>
                     </tr>
                 <?php } ?>
-                <tr class="bg-primary text-light">
+                <tr class="bg-info text-light">
+                    <td colspan="4">
+                        <?php for ($i = 1; $i <= $pages; $i++) { ?>
+                            <a href="?page=<?= $i ?>" class="btn btn-warning"><?= $i ?></a>
+                        <?php
+                        } ?>
+                    </td>
+                </tr>
+                <tr class="bg-dark text-light">
                     <td colspan="4">
                         <a href="secret.php" class="btn btn-warning" role="button">回到首頁</a>
                     </td>

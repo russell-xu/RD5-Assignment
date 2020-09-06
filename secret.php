@@ -59,7 +59,7 @@ $amount = $row[3];
   <form method="post">
     <table class="table table-bordered">
       <thead>
-        <tr class="bg-primary text-light">
+        <tr class="bg-dark text-light">
           <td>
             <p class="title">網路銀行 － 首頁</p>
           </td>
@@ -78,7 +78,7 @@ $amount = $row[3];
             <a href="query_details.php" class="btn btn-success feature" role="button">查詢明細</a>
           </td>
         </tr>
-        <tr class="bg-primary text-light">
+        <tr class="bg-dark text-light">
           <td>
             <input class="btn btn-warning" type="submit" name="btnSignOut" id="btnSignOut" value="登出" />
           </td>
