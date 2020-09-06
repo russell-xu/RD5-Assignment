@@ -108,7 +108,7 @@ if (isset($_POST["btnOK"])) {
         <tr>
           <td class="align-middle">請輸入要提取的金額</td>
           <td>
-            <input class="input_amount" type="number" name="withdrawal_amount" id="withdrawal_amount" />
+            <input class="input_amount" type="number" name="withdrawal_amount" id="withdrawal_amount" autofocus/>
           </td>
         </tr>
         <tr>

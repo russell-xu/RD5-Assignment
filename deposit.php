@@ -104,7 +104,7 @@ if (isset($_POST["btnOK"])) {
         <tr>
           <td class="align-middle">請輸入要存入的金額</td>
           <td>
-            <input class="input_amount" type="number" name="deposit_amount" id="deposit_amount" />
+            <input class="input_amount" type="number" name="deposit_amount" id="deposit_amount" autofocus/>
           </td>
         </tr>
         <tr>

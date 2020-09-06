@@ -49,8 +49,8 @@ $amount = $row[3];
       font-size: 20px;
     }
 
-    .hide_balance {
-      color: white;
+    #balance {
+      cursor: pointer;
     }
   </style>
 </head>
@@ -94,9 +94,8 @@ $amount = $row[3];
   <script>
     let show_hide_target = document.querySelector("#balance")
     let show_hide_target_value = document.querySelector("#balance").innerHTML
-    // console.log(show_hide_target_value);
+
     show_hide_target.addEventListener("click", () => {
-      // show_hide_target.classList.toggle("hide_balance")
       if (show_hide_target.innerHTML === show_hide_target_value) {
         show_hide_target.innerHTML = "**********";
       } else {

@@ -80,7 +80,7 @@ if (isset($_POST["btnOK"])) {
         <tr>
           <td class="align-middle">身分證字號</td>
           <td>
-            <input type="text" name="txtIdNumber" id="txtIdNumber" />
+            <input type="text" name="txtIdNumber" id="txtIdNumber" autofocus />
           </td>
         </tr>
         <tr>
