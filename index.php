@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("connectconfig.php");
 
 $ErrorMessage = "";
 
@@ -8,12 +9,12 @@ if (isset($_POST["btnOK"])) {
   $sUserName = $_POST["txtUserName"];
   $sPassword = $_POST["txtPassword"];
 
-  require_once("connectconfig.php");
-  $sql = "SELECT * FROM userlist where Idnumber = '$sIdNumber'";
-  $result = $link->query($sql);
-  $row = @$result->fetch_row();
+  $sql_user_data = "SELECT * FROM userlist where Idnumber = '$sIdNumber'";
+  $stmt = $db->prepare($sql_user_data);
+  $stmt->execute();
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  if ($row !== null && $sIdNumber != null && $sUserName != null && $sPassword != null && $row[0] == $sIdNumber && $row[1] == $sUserName && $row[2] == $sPassword) {
+  if ($row !== null && $sIdNumber != null && $sUserName != null && $sPassword != null && $row['Idnumber'] == $sIdNumber && $row['Username'] == $sUserName && $row['PASSWORD'] == $sPassword) {
     $_SESSION["id"] = $sIdNumber;
     $_SESSION["userName"] = $sUserName;
     header("Location: secret.php");
@@ -72,7 +73,7 @@ if (isset($_POST["btnOK"])) {
         <tr>
           <td class="align-middle">身分證字號</td>
           <td>
-            <input type="text" name="txtIdNumber" id="txtIdNumber" autofocus/>
+            <input type="text" name="txtIdNumber" id="txtIdNumber" autofocus />
           </td>
         </tr>
         <tr>

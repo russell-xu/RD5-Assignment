@@ -8,7 +8,7 @@ if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
 $id = $_SESSION["id"];
 
 require_once("connectconfig.php");
-$sql = <<<multi
+$sql_detail = <<<multi
 SELECT
     *
 FROM
@@ -19,9 +19,11 @@ ORDER BY
     `DATE`
 DESC
 multi;
-$result = $link->query($sql);
+$result_detail = $db->prepare($sql_detail);
+$result_detail->execute();
 
-$data_nums = $result->num_rows;
+$data_nums = $result_detail->rowCount();
+
 $per = 10;
 $pages = ceil($data_nums / $per);
 if (!isset($_GET["page"])) {
@@ -30,7 +32,8 @@ if (!isset($_GET["page"])) {
     $page = intval($_GET["page"]);
 }
 $start = ($page - 1) * $per;
-$result = $link->query($sql . ' LIMIT ' . $start . ', ' . $per);
+$result = $db->prepare($sql_detail . ' LIMIT ' . $start . ', ' . $per);
+$result->execute();
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +88,7 @@ $result = $link->query($sql . ' LIMIT ' . $start . ', ' . $per);
                 </tr>
             </thead>
             <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
                     <tr class="text-center">
                         <td class="align-middle"><?= $row['DATE'] ?></td>
                         <td class="align-middle"><?= $row['Withdrawal'] ?></td>

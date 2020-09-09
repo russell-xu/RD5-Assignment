@@ -1,8 +1,10 @@
 <?php
 session_start();
+require_once("connectconfig.php");
+
 if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
-    header("Location: index.php");
-    exit();
+  header("Location: index.php");
+  exit();
 }
 
 $ErrorMessage = "";
@@ -11,16 +13,16 @@ if (isset($_POST["btnOK"])) {
   $withdrawal_amount = $_POST["withdrawal_amount"];
 
   if (preg_match("/^[0-9]+$/", $withdrawal_amount)) {
-    require_once("connectconfig.php");
 
     $id = $_SESSION["id"];
-    $sql_number = "select * from userlist where Idnumber='$id'";
-    $result = $link->query($sql_number);
-    $row = @$result->fetch_row();
-    $amount = $row[3] - $withdrawal_amount;
+    $sql_user_data = "select * from userlist where Idnumber='$id'";
+    $user_data = $db->prepare($sql_user_data);
+    $user_data->execute();
+    $row = $user_data->fetch(PDO::FETCH_ASSOC);
+    $amount = $row['Deposit'] - $withdrawal_amount;
 
     if ($amount >= 0) {
-      $sql = <<<multi
+      $sql_update_deposit = <<<multi
         UPDATE
             userlist
         SET
@@ -28,9 +30,10 @@ if (isset($_POST["btnOK"])) {
         WHERE
             Idnumber = "$id";
       multi;
-      $link->query($sql);
+      $update_deposit = $db->prepare($sql_update_deposit);
+      $update_deposit->execute();
 
-      $sql_detail = <<<multi
+      $sql_insert_detail = <<<multi
         INSERT INTO detail(
             Withdrawal,
             Deposit,
@@ -44,7 +47,8 @@ if (isset($_POST["btnOK"])) {
             '$id'
         );
       multi;
-      $link->query($sql_detail);
+      $insert_detail = $db->prepare($sql_insert_detail);
+      $insert_detail->execute();
 
       header("Location: withdrawal_success.php");
       exit();
@@ -108,7 +112,7 @@ if (isset($_POST["btnOK"])) {
         <tr>
           <td class="align-middle">請輸入要提取的金額</td>
           <td>
-            <input class="input_amount" type="number" name="withdrawal_amount" id="withdrawal_amount" autofocus/>
+            <input class="input_amount" type="number" name="withdrawal_amount" id="withdrawal_amount" autofocus />
           </td>
         </tr>
         <tr>

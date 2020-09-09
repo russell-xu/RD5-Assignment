@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("connectconfig.php");
 
 if (isset($_POST["btnHome"])) {
   header("Location: index.php");
@@ -14,17 +15,18 @@ if (isset($_POST["btnOK"])) {
   $sUserName = $_POST["txtUserName"];
   $sPassword = $_POST["txtPassword"];
 
-  require_once("connectconfig.php");
-  $sql = "select * from userlist where Idnumber='$sIdNumber'";
-  $result = $link->query($sql);
-  $num = $result->num_rows;
+  $sql_user_data = "select * from userlist where Idnumber='$sIdNumber'";
+  $user_data = $db->prepare($sql_user_data);
+  $user_data->execute();
+  $num = $user_data->rowCount();
 
   if (preg_match("/^[A-Z]{1}[12ABCD]{1}[0-9]{8}$/", $sIdNumber) && trim($sUserName) != "" && preg_match('/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8}/', $sPassword) && $num == 0) {
     $_SESSION["userName"] = $sUserName;
-    $sql = <<<multi
-  INSERT INTO userlist(IdNumber, UserName, Password) VALUES('$sIdNumber', '$sUserName', '$sPassword');
-  multi;
-    $link->query($sql);
+    $sql_registered = <<<multi
+    INSERT INTO userlist(IdNumber, UserName, Password) VALUES('$sIdNumber', '$sUserName', '$sPassword');
+    multi;
+    $registered = $db->prepare($sql_registered);
+    $registered->execute();
     header("Location: registration_success.php");
     exit();
   } else {

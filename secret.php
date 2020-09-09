@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("connectconfig.php");
 if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
   header("Location: index.php");
   exit();
@@ -11,12 +12,12 @@ if (isset($_POST["btnSignOut"])) {
   exit();
 }
 
-require_once("connectconfig.php");
 $id = $_SESSION["id"];
 $sql_number = "select * from userlist where Idnumber='$id'";
-$result = $link->query($sql_number);
-$row = @$result->fetch_row();
-$amount = $row[3];
+$stmt = $db->prepare($sql_number);
+$stmt->execute();
+$rows = $stmt->fetch(PDO::FETCH_ASSOC);
+$amount = $rows['Deposit'];
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once("connectconfig.php");
+
 if (!isset($_SESSION["userName"]) || $_SESSION["userName"] == "Guest") {
   header("Location: index.php");
   exit();
@@ -11,15 +13,15 @@ if (isset($_POST["btnOK"])) {
   $deposit_amount = $_POST["deposit_amount"];
 
   if (preg_match("/^[0-9]+$/", $deposit_amount)) {
-    require_once("connectconfig.php");
 
     $id = $_SESSION["id"];
     $sql_number = "select * from userlist where Idnumber='$id'";
-    $result = $link->query($sql_number);
-    $row = @$result->fetch_row();
-    $amount = $row[3] + $deposit_amount;
+    $result_number = $db->prepare($sql_number);
+    $result_number->execute();
+    $rows = $result_number->fetch(PDO::FETCH_ASSOC);
+    $amount = $rows['Deposit'] + $deposit_amount;
 
-    $sql = <<<multi
+    $sql_update_deposit = <<<multi
       UPDATE
           userlist
       SET
@@ -27,9 +29,10 @@ if (isset($_POST["btnOK"])) {
       WHERE
           Idnumber = "$id";
     multi;
-    $link->query($sql);
+    $result_update_deposit = $db->prepare($sql_update_deposit);
+    $result_update_deposit->execute();
 
-    $sql_detail = <<<multi
+    $sql_insert_detail = <<<multi
       INSERT INTO detail(
           Withdrawal,
           Deposit,
@@ -43,7 +46,8 @@ if (isset($_POST["btnOK"])) {
           '$id'
       );
     multi;
-    $link->query($sql_detail);
+    $result_insert_detail = $db->prepare($sql_insert_detail);
+    $result_insert_detail->execute();
 
     header("Location: deposit_success.php");
     exit();
