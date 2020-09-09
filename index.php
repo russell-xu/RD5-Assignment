@@ -9,7 +9,14 @@ if (isset($_POST["btnOK"])) {
   $sUserName = $_POST["txtUserName"];
   $sPassword = $_POST["txtPassword"];
 
-  $sql_user_data = "SELECT * FROM userlist where Idnumber = '$sIdNumber'";
+  $sql_user_data = <<<multi
+  SELECT
+    *
+  FROM
+    userlist
+  WHERE
+    Idnumber = '$sIdNumber'
+  multi;
   $stmt = $db->prepare($sql_user_data);
   $stmt->execute();
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
